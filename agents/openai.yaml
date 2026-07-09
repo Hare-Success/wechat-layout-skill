@@ -1,0 +1,5 @@
+interface:
+  display_name: "WeChat Layout"
+  short_description: "Generate WeChat article layout HTML"
+  default_prompt: "Use $wechat-layout to create WeChat-compatible article layout HTML from md, docx, txt, or pasted Markdown."
+
