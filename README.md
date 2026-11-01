@@ -7,13 +7,13 @@
 # 渲染（默认主题 tech-ai）
 python scripts/render.py 文章.md -o 文章.wechat.html
 
-# 切换主题（assets/themes/ 下的目录名，如 growth）
+# 切换主题（assets/themes/ 下的单文件主题，如 growth）
 python scripts/render.py 文章.md --theme growth -o 文章.wechat.html
 
-# 校验主题模板是否符合公众号 HTML 规则
-python scripts/validate_template.py assets/themes/growth
+# 校验主题文件是否符合公众号 HTML 规则
+python scripts/validate_template.py assets/themes/growth.html
 ```
 
-主题 = `assets/themes/<主题名>/` 下的 `theme.json` + `components/*.html`。
+主题 = `assets/themes/<主题名>.html` 一个文件（`@config` 配置 + 17 个 `@component` 组件模板）。
 新增主题的组件清单与规则见 [references/theme-contract.md](references/theme-contract.md)。
 

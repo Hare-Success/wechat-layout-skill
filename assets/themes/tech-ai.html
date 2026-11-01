@@ -1,0 +1,127 @@
+<!-- 主题：Tech AI —— 单文件主题。
+     @config 为主题配置；@component 之间为组件模板，内容与迁移前逐字一致。
+     规则：注释里不要出现 $变量；inline-code/strong/divider/image_placeholder 必须保持单行无注释。
+     组件清单与书写契约见 references/theme-contract.md。 -->
+
+<!-- @config
+{
+  "name": "tech-ai",
+  "display_name": "Tech AI",
+  "description": "A WeChat Official Account theme for tech and AI content, based on card-style article layouts.",
+  "primary": "#4F46E5",
+  "light_bg": "#F0F4FF",
+  "body_color": "#333333",
+  "body_font_size": "15px",
+  "body_line_height": "1.9"
+}
+-->
+
+<!-- @component article -->
+<!-- 文章外层容器：控制公众号正文的基础字体、字号、行高和左右留白 -->
+<section style="max-width:100%;padding:10px 8px;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:$body_color;line-height:$body_line_height;font-size:$body_font_size;word-wrap:break-word;">
+$content
+</section>
+
+
+<!-- @component heading-h1 -->
+<!-- 一级标题：居中 + 主题色下划线装饰条 -->
+<section style="text-align:center;padding:25px 0 15px 0;">
+  <p style="font-size:23px;font-weight:bold;color:#1a1a1a;line-height:1.5;margin:0;">$content</p>
+<section style="width:40px;height:3px;background-color:$primary;margin:14px auto 0 auto;border-radius:2px;"></section>
+</section>
+
+
+<!-- @component heading-h2 -->
+<!-- 二级标题：Part 编号胶囊标签 + 章节标题（编号由渲染器按出现顺序注入） -->
+<section style="margin-top:30px;">
+<p style="margin:0 0 14px 0;"><span style="background-color:$primary;color:#ffffff;font-size:12px;font-weight:bold;padding:3px 12px;border-radius:8px;letter-spacing:1px;">Part $part_number</span></p>
+  <p style="font-size:20px;font-weight:bold;color:#1a1a1a;margin:0 0 14px 0;line-height:1.6;">$content</p>
+</section>
+
+
+<!-- @component heading-h3 -->
+<!-- 三级标题（H4-H6 同样式）：左侧主题色竖线 -->
+<section style="margin-top:24px;margin-bottom:12px;border-left:4px solid $primary;padding-left:12px;">
+  <p style="font-size:17px;font-weight:bold;color:#1a1a1a;margin:0;line-height:1.6;">$content</p>
+</section>
+
+
+<!-- @component paragraph -->
+<!-- 普通段落：正文默认样式 -->
+<p style="margin:12px 0;font-size:$body_font_size;line-height:$body_line_height;color:$body_color;">$content</p>
+
+
+<!-- @component quote -->
+<!-- 引用块：用于 Markdown > 引言内容 -->
+<section style="background-color:$light_bg;border-left:4px solid $primary;padding:14px 16px;margin:18px 0;border-radius:0 6px 6px 0;">
+  <p style="margin:0;color:#4a4a6a;font-size:14px;line-height:1.9;">$content</p>
+</section>
+
+
+<!-- @component inline-code -->
+<span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">$content</span>
+
+
+<!-- @component strong -->
+<strong style="color:$primary;font-weight:bold;">$content</strong>
+
+
+<!-- @component list -->
+<!-- 列表容器：有序列表和无序列表共用这个外层样式，具体序号或圆点由渲染器生成 -->
+<section style="background-color:#fafafa;border-radius:6px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:2;">
+$items
+</section>
+
+
+<!-- @component list-item-ul -->
+<!-- 无序列表项：主题色圆点 + 文本（内容由渲染器逐项填充） -->
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:$primary;font-weight:bold;">&bull;</span><span>$content</span></p>
+
+
+<!-- @component list-item-ol -->
+<!-- 有序列表项：主题色编号 + 文本（编号由渲染器按起始编号连续生成） -->
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;min-width:22px;color:$primary;font-weight:bold;">${number}.</span><span>$content</span></p>
+
+
+<!-- @component card -->
+<!-- 信息卡片：用于 :::card / :::tip / :::example 等块级内容 -->
+<section style="border-left:3px solid $primary;padding-left:14px;margin:20px 0;">
+  <p style="font-size:15px;color:$primary;font-weight:bold;margin:0 0 8px 0;line-height:1.7;">$title</p>
+  <p style="margin:0;font-size:14px;color:#555555;line-height:1.9;">$content</p>
+</section>
+
+
+<!-- @component highlight -->
+<!-- 强调卡片：用于 :::highlight，适合突出一句核心观点 -->
+<section style="background-color:$primary;border-radius:8px;padding:20px 16px;margin:18px 0;text-align:center;">
+  <p style="margin:0;font-size:16px;font-weight:bold;color:#ffffff;line-height:1.6;">$content</p>
+</section>
+
+
+<!-- @component warning -->
+<!-- 警告卡片：用于 :::warning 块级内容，暖色警示风格 -->
+<section style="border-left:3px solid #e67e22;padding-left:14px;margin:20px 0;background-color:#fffaf0;">
+  <p style="font-size:15px;color:#e67e22;font-weight:bold;margin:0 0 8px 0;line-height:1.7;">$title</p>
+  <p style="margin:0;font-size:14px;color:#555555;line-height:1.9;">$content</p>
+</section>
+
+
+<!-- @component code -->
+<!-- 代码块：用于 Markdown ```lang fenced code，内容会先转义再注入 -->
+<section style="background-color:#1e1e2e;border-radius:6px;padding:14px 16px;margin:14px 0;">
+  <p style="margin:0 0 8px 0;font-size:12px;color:#888888;font-family:Menlo,Consolas,monospace;">$lang</p>
+  <pre style="margin:0;white-space:pre-wrap;word-wrap:break-word;font-size:13px;line-height:1.8;color:#a6e3a1;font-family:Menlo,Consolas,monospace;"><code>$content</code></pre>
+</section>
+
+
+<!-- @component divider -->
+<!-- 分割线：用于 Markdown --- / *** / ___ -->
+<section style="height:1px;background-color:#eeeeee;margin:28px 0;"></section>
+
+
+<!-- @component image_placeholder -->
+<!-- 图片占位：用于 Markdown 中的 插入图片 / [image] / ![](...) 等图片位置 -->
+<section style="background-color:#fafafa;border:1px dashed #cccccc;border-radius:6px;padding:18px 16px;margin:18px 0;text-align:center;">
+  <p style="margin:0;font-size:13px;color:#888888;line-height:1.8;">图片占位：请在公众号编辑器中上传并替换图片</p>
+</section>
+
