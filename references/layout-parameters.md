@@ -1,26 +1,26 @@
-# Layout Parameters
+# 排版参数
 
-## Typography And Spacing
+## 字体与间距
 
-| Parameter | Recommended Value |
+| 参数 | 建议值 |
 | --- | --- |
-| Body font size | 15px |
-| Body line height | 1.9 |
-| Body color | #333333 |
-| Secondary text | 13px to 14px, #555 or #888 |
-| Heading font size | 19px to 23px |
-| Paragraph spacing | margin: 12px 0 |
-| Section spacing | margin-top: 28px to 32px |
-| Card padding | padding: 14px 16px |
-| Card radius | border-radius: 6px to 8px |
+| 正文字号 | 15px |
+| 正文行高 | 1.9 |
+| 正文颜色 | #333333 |
+| 次要文字 | 13px 到 14px，#555 或 #888 |
+| 标题字号 | 19px 到 23px |
+| 段落间距 | margin: 12px 0 |
+| 章节间距 | margin-top: 28px 到 32px |
+| 卡片内边距 | padding: 14px 16px |
+| 卡片圆角 | border-radius: 6px 到 8px |
 
-## Color Palettes
+## 配色方案
 
-| Theme | Primary | Light Background | Scenario |
+| 主题 | 主色 | 浅色背景 | 适用场景 |
 | --- | --- | --- | --- |
-| Tech / AI | #4F46E5 | #F0F4FF | Technical articles and product interpretation |
-| Growth / Business | #059669 | #F0FDF4 | Operations plans and growth strategy |
-| Brand / Marketing | #DC2626 | #FEF2F2 | Campaigns and brand communication |
-| Education / Knowledge | #7C3AED | #F5F3FF | Tutorials and knowledge explainers |
-| Finance / Serious | #1E40AF | #EFF6FF | Industry reports and policy interpretation |
-| Warm / Lifestyle | #D97706 | #FFFBEB | Lifestyle and emotional writing |
+| 科技 / AI | #4F46E5 | #F0F4FF | 技术文章与产品解读 |
+| 增长 / 商业 | #059669 | #F0FDF4 | 运营方案与增长策略 |
+| 品牌 / 营销 | #DC2626 | #FEF2F2 | 活动推广与品牌传播 |
+| 教育 / 知识 | #7C3AED | #F5F3FF | 教程与知识讲解 |
+| 金融 / 严肃 | #1E40AF | #EFF6FF | 行业报告与政策解读 |
+| 温暖 / 生活 | #D97706 | #FFFBEB | 生活与情感类写作 |

@@ -1,0 +1,173 @@
+[
+  {
+    "type": "heading",
+    "content": "Fenno Image",
+    "level": 1,
+    "lang": "",
+    "items": [],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "paragraph",
+    "content": "Use Fenno's OpenAI-compatible image generation endpoint to create raster images with `gpt-image-2`.",
+    "level": null,
+    "lang": "",
+    "items": [],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "heading",
+    "content": "Quick Start",
+    "level": 2,
+    "lang": "",
+    "items": [],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "ordered_list",
+    "content": "",
+    "level": null,
+    "lang": "",
+    "items": [
+      "Read the user's requested prompt, style, aspect ratio, size, and output location.",
+      "Require the API key in `FENNO\\_API\\_KEY`. If it is missing, ask the user to set it or provide permission to set it for the current shell session.",
+      "Run the bundled script:"
+    ],
+    "title": "",
+    "meta": {
+      "start": 1
+    }
+  },
+  {
+    "type": "code",
+    "content": "\npython <skill-dir>/scripts/generate\\_image.py --prompt \"...\" --output-dir outputs\n",
+    "level": null,
+    "lang": "bash",
+    "items": [],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "ordered_list",
+    "content": "",
+    "level": null,
+    "lang": "",
+    "items": [
+      "Inspect the saved image before returning it when visual quality matters.",
+      "In the final response, provide the generated file path and mention any important generation settings."
+    ],
+    "title": "",
+    "meta": {
+      "start": 4
+    }
+  },
+  {
+    "type": "heading",
+    "content": "Defaults",
+    "level": 2,
+    "lang": "",
+    "items": [],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "unordered_list",
+    "content": "",
+    "level": null,
+    "lang": "",
+    "items": [
+      "Base URL: `https://api.fenno.ai`",
+      "Endpoint: `/v1/images/generations`",
+      "Model: `gpt-image-2`",
+      "Environment variable: `FENNO\\_API\\_KEY`",
+      "Default size: `1024x1024`",
+      "Default output format: PNG"
+    ],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "paragraph",
+    "content": "Do not hardcode API keys into skill files, scripts, logs, or final responses. Prefer environment variables.",
+    "level": null,
+    "lang": "",
+    "items": [],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "heading",
+    "content": "Script Usage",
+    "level": 2,
+    "lang": "",
+    "items": [],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "code",
+    "content": "\npython <skill-dir>/scripts/generate\\_image.py \\\\\n\n&#x20; --prompt \"A clean product render of a glass tea cup on a walnut table\" \\\\\n\n&#x20; --size 1024x1024 \\\\\n\n&#x20; --output-dir outputs \\\\\n\n&#x20; --filename tea-cup.png\n",
+    "level": null,
+    "lang": "bash",
+    "items": [],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "paragraph",
+    "content": "Useful options:",
+    "level": null,
+    "lang": "",
+    "items": [],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "unordered_list",
+    "content": "",
+    "level": null,
+    "lang": "",
+    "items": [
+      "`--prompt`: required image prompt.",
+      "`--size`: image size such as `1024x1024`, `1536x1024`, or any size supported by the endpoint.",
+      "`--n`: number of images to request.",
+      "`--quality`: optional quality value, passed through when provided.",
+      "`--style`: optional style value, passed through when provided.",
+      "`--output-dir`: directory for generated image files.",
+      "`--filename`: filename for a single image. For multiple images, the script appends an index.",
+      "`--base-url`: override the base URL only if the user explicitly asks."
+    ],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "heading",
+    "content": "Prompting Guidance",
+    "level": 2,
+    "lang": "",
+    "items": [],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "paragraph",
+    "content": "Write prompts as direct visual briefs. Include subject, scene, composition, lighting, material, camera or art style, and constraints. Keep file-format or delivery instructions outside the prompt unless they are visual requirements.",
+    "level": null,
+    "lang": "",
+    "items": [],
+    "title": "",
+    "meta": {}
+  },
+  {
+    "type": "paragraph",
+    "content": "When the user asks for variants, generate `--n` images when appropriate. When the user asks for a specific aspect ratio, choose the closest supported `--size` and state that choice.",
+    "level": null,
+    "lang": "",
+    "items": [],
+    "title": "",
+    "meta": {}
+  }
+]

@@ -1,0 +1,116 @@
+
+<section style="max-width:100%;padding:10px 8px;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#333333;line-height:1.9;font-size:15px;word-wrap:break-word;">
+<section style="text-align:center;padding:25px 0 15px 0;">
+
+  <p style="font-size:23px;font-weight:bold;color:#1a1a1a;line-height:1.5;margin:0;">Docker网络认识</p>
+<section style="width:40px;height:3px;background-color:#4F46E5;margin:14px auto 0 auto;border-radius:2px;"></section>
+</section>
+<section style="margin-top:30px;">
+<p style="margin:0 0 14px 0;"><span style="background-color:#4F46E5;color:#ffffff;font-size:12px;font-weight:bold;padding:3px 12px;border-radius:8px;letter-spacing:1px;">Part 1</span></p>
+  <p style="font-size:20px;font-weight:bold;color:#1a1a1a;margin:0 0 14px 0;line-height:1.6;">Bridge(桥接模式)</p>
+
+</section>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;">[官网bridge地址](https://docs.docker.com/engine/network/drivers/bridge/)</p>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;">Docker中若没有指定~默认的就是bridge模式 <strong style="color:#4F46E5;font-weight:bold;">[查看: docker inspect 容器id | tail -n 20]</strong></p>
+<section style="margin-top:24px;margin-bottom:12px;border-left:4px solid #4F46E5;padding-left:12px;">
+
+  <p style="font-size:17px;font-weight:bold;color:#1a1a1a;margin:0;line-height:1.6;">相关原理图</p>
+
+</section>
+<section style="border-left:3px solid #4F46E5;padding-left:14px;margin:20px 0;">
+  <p style="font-size:15px;color:#4F46E5;font-weight:bold;margin:0 0 8px 0;line-height:1.7;">Note</p>
+  <p style="margin:0;font-size:14px;color:#555555;line-height:1.9;">使用ifconfig/ip addr可看到宿主机有一个docker0的网桥。安装启动docker后这个docker0就会出现。&lt;br/&gt;<br>而这个docker0充当一个接口的作用。俗称网桥。我们看如下图:</p>
+</section>
+<section style="background-color:#fafafa;border:1px dashed #cccccc;border-radius:6px;padding:18px 16px;margin:18px 0;text-align:center;">
+  <p style="margin:0;font-size:13px;color:#888888;line-height:1.8;">图片占位：请在公众号编辑器中上传并替换图片</p>
+</section>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;">化繁入简解释下: docker0是一个接口一个网桥，而每个容器都有属于自己的网络eth0。每个容器对一个网桥docker0上的一个接口veth(一一对应)。 最后网桥连接宿主机！<strong style="color:#4F46E5;font-weight:bold;">最终达到目的，容器与宿主机互通，容器与容器互通(在一个docker中)。</strong>&lt;br/&gt; &lt;br/&gt; bridge模式中，每个容器启动后都会有一个属于容器内部的一个ip(172....开头)。</p>
+
+﻿
+<section style="border-left:3px solid #e67e22;padding-left:14px;margin:20px 0;background-color:#fffaf0;">
+  <p style="font-size:15px;color:#e67e22;font-weight:bold;margin:0 0 8px 0;line-height:1.7;">官方警告</p>
+  <p style="margin:0;font-size:14px;color:#555555;line-height:1.9;">~~~<br>The default bridge network is considered a legacy detail of Docker and is not recommended for production use. &lt;br/&gt;<br>Configuring it is a manual operation, and it has technical shortcomings.<br>💨总的说默认的bridge模式存在缺陷，不建议在生产使用~ 需要我们自定义一个网络(默认bridge桥接即可)<br>~~~<br>~~~<br>All containers without a --network specified, are attached to the default bridge network. This can be a risk, as unrelated stacks/services/containers are then able to communicate.<br>Using a user-defined network provides a scoped network in which only containers attached to that network are able to communicate.<br>💨所有未指定--网络的容器都会连接到默认桥接网络。 这可能会带来风险，因为不相关的堆栈/服务/容器都可以进行通信<br>~~~<br>~~~<br>Containers on the default bridge network can only access each other by IP addresses, unless you use the --link option, which is considered legacy. On a user-defined bridge network, containers can resolve each other by name or alias.<br>Imagine an application with a web front-end and a database back-end. If you call your containers web and db, the web container can connect to the db container at db, no matter which Docker host the application stack is running on.<br>If you run the same application stack on the default bridge network, you need to manually create links between the containers (using the legacy --link flag). These links need to be created in both directions, so you can see this gets complex with more than two containers which need to communicate. Alternatively, you can manipulate the /etc/hosts files within the containers, but this creates problems that are difficult to debug.<br>💨大体就是说 默认的bridge桥接模式，只能以ip+port(但是bridge模式下，容器的内网ip是会变换的)💨<br>当你使用ip+port定义，一旦更换了ip就傻眼了~而自定义的网络(桥接)可以使用: 容器服务名:port的方式！！！！！<br>~~~</p>
+</section>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;">So，我们还是创建一个属于自己的网络吧(默认桥接bridge)~</p>
+<section style="margin-top:24px;margin-bottom:12px;border-left:4px solid #4F46E5;padding-left:12px;">
+
+  <p style="font-size:17px;font-weight:bold;color:#1a1a1a;margin:0;line-height:1.6;">创建自定义网络</p>
+
+</section>
+<section style="background-color:#1e1e2e;border-radius:6px;padding:14px 16px;margin:14px 0;">
+  <p style="margin:0 0 8px 0;font-size:12px;color:#888888;font-family:Menlo,Consolas,monospace;">bash</p>
+  <pre style="margin:0;white-space:pre-wrap;word-wrap:break-word;font-size:13px;line-height:1.8;color:#a6e3a1;font-family:Menlo,Consolas,monospace;"><code>docker network create my-network
+
+# 查看
+docker network ls
+
+#启动容器时指定网络
+docker run --network my-network </code></pre>
+</section>
+<section style="border-left:3px solid #4F46E5;padding-left:14px;margin:20px 0;">
+  <p style="font-size:15px;color:#4F46E5;font-weight:bold;margin:0 0 8px 0;line-height:1.7;">Note</p>
+  <p style="margin:0;font-size:14px;color:#555555;line-height:1.9;">上述已经说过，使用自定义的网络时。可直接使用 <strong style="color:#4F46E5;font-weight:bold;">容器名:port</strong><br>~~~yaml title=&#x27;例如naocs的注册中心地址&#x27;<br>cloud:<br>nacos:<br>discovery:<br>#容器名:port<br>server-addr: my-nacos:8848<br>~~~</p>
+</section>
+<section style="margin-top:24px;margin-bottom:12px;border-left:4px solid #4F46E5;padding-left:12px;">
+
+  <p style="font-size:17px;font-weight:bold;color:#1a1a1a;margin:0;line-height:1.6;">FAQ</p>
+
+</section>
+<section style="background-color:#fafafa;border-radius:6px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:2;">
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;min-width:22px;color:#4F46E5;font-weight:bold;">1.</span><span>容器已经在运行，如何指定现有自定义网络?</span></p>
+</section>
+<section style="background-color:#1e1e2e;border-radius:6px;padding:14px 16px;margin:14px 0;">
+  <p style="margin:0 0 8px 0;font-size:12px;color:#888888;font-family:Menlo,Consolas,monospace;">bash</p>
+  <pre style="margin:0;white-space:pre-wrap;word-wrap:break-word;font-size:13px;line-height:1.8;color:#a6e3a1;font-family:Menlo,Consolas,monospace;"><code># docker network connect 网络名称 容器名
+docker network connect my-network my-mysql</code></pre>
+</section>
+<section style="background-color:#fafafa;border-radius:6px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:2;">
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;min-width:22px;color:#4F46E5;font-weight:bold;">2.</span><span>若只是想容器间通信，无需暴露端口(-p )。保证接入同一网络(桥接)</span></p>
+</section>
+<section style="border-left:3px solid #4F46E5;padding-left:14px;margin:20px 0;">
+  <p style="font-size:15px;color:#4F46E5;font-weight:bold;margin:0 0 8px 0;line-height:1.7;">官方</p>
+  <p style="margin:0;font-size:14px;color:#555555;line-height:1.9;">If you want to make a container accessible to other containers, it isn&#x27;t necessary to publish the container&#x27;s ports. You can enable inter-container communication by connecting the containers to the same network, usually a bridge network.</p>
+</section>
+<section style="background-color:#fafafa;border-radius:6px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:2;">
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;min-width:22px;color:#4F46E5;font-weight:bold;">3.</span><span>官方说明，暴露端口(-p )比较危险，不仅docker主机能访问，外部也可连接。</span></p>
+</section>
+<section style="border-left:3px solid #4F46E5;padding-left:14px;margin:20px 0;">
+  <p style="font-size:15px;color:#4F46E5;font-weight:bold;margin:0 0 8px 0;line-height:1.7;">官方</p>
+  <p style="margin:0;font-size:14px;color:#555555;line-height:1.9;">Publishing container ports is insecure by default. Meaning, when you publish a container&#x27;s ports it becomes available not only to the Docker host, but to the outside world as well.<br>If you include the localhost IP address (127.0.0.1, or ::1) with the publish flag, only the Docker host and its containers can access the published container port.</p>
+</section>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;"><strong style="color:#4F46E5;font-weight:bold;">若只想主机与其容器访问:</strong></p>
+<section style="background-color:#1e1e2e;border-radius:6px;padding:14px 16px;margin:14px 0;">
+  <p style="margin:0 0 8px 0;font-size:12px;color:#888888;font-family:Menlo,Consolas,monospace;">bash</p>
+  <pre style="margin:0;white-space:pre-wrap;word-wrap:break-word;font-size:13px;line-height:1.8;color:#a6e3a1;font-family:Menlo,Consolas,monospace;"><code># -p 时加入ip地址。将主机127.0.0.0上的8080映射到容器80
+docker run -p 127.0.0.0:8080:80 nginx</code></pre>
+</section>
+<section style="margin-top:30px;">
+<p style="margin:0 0 14px 0;"><span style="background-color:#4F46E5;color:#ffffff;font-size:12px;font-weight:bold;padding:3px 12px;border-radius:8px;letter-spacing:1px;">Part 2</span></p>
+  <p style="font-size:20px;font-weight:bold;color:#1a1a1a;margin:0 0 14px 0;line-height:1.6;">Host模式</p>
+
+</section>
+<section style="border-left:3px solid #4F46E5;padding-left:14px;margin:20px 0;">
+  <p style="font-size:15px;color:#4F46E5;font-weight:bold;margin:0 0 8px 0;line-height:1.7;">上官方</p>
+  <p style="margin:0;font-size:14px;color:#555555;line-height:1.9;">If you use the host network mode for a container, that container&#x27;s network stack isn&#x27;t isolated from the Docker host (the container shares the host&#x27;s networking namespace), and the container doesn&#x27;t get its own IP-address allocated. For instance, if you run a container which binds to port 80 and you use host networking, the container&#x27;s application is available on port 80 on the host&#x27;s IP address.</p>
+</section>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;">什么意思呢，化繁入简解释: Host(主机模式)没有网桥中间连接一层的说法了，容器用的就是主机的网络。</p>
+<section style="margin-top:24px;margin-bottom:12px;border-left:4px solid #4F46E5;padding-left:12px;">
+
+  <p style="font-size:17px;font-weight:bold;color:#1a1a1a;margin:0;line-height:1.6;">相关原理图</p>
+
+</section>
+<section style="background-color:#fafafa;border:1px dashed #cccccc;border-radius:6px;padding:18px 16px;margin:18px 0;text-align:center;">
+  <p style="margin:0;font-size:13px;color:#888888;line-height:1.8;">图片占位：请在公众号编辑器中上传并替换图片</p>
+</section>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;">容器共享了主机的网络，也就是说 启动nacos容器 之前bridge桥接模式需要暴露 -p 8848:8848 端口供外界连接。 而一旦使用了Host模式如下启动:</p>
+<section style="border-left:3px solid #4F46E5;padding-left:14px;margin:20px 0;">
+  <p style="font-size:15px;color:#4F46E5;font-weight:bold;margin:0 0 8px 0;line-height:1.7;">继续官方</p>
+  <p style="margin:0;font-size:14px;color:#555555;line-height:1.9;">Given that the container does not have its own IP-address when using host mode networking, port-mapping doesn&#x27;t take effect, and the -p, --publish, -P, and --publish-all option are ignored, producing a warning instead:<br>:::warning<br>WARNING: Published ports are discarded when using host network mode</p>
+</section>
+<section style="background-color:#1e1e2e;border-radius:6px;padding:14px 16px;margin:14px 0;">
+  <p style="margin:0 0 8px 0;font-size:12px;color:#888888;font-family:Menlo,Consolas,monospace;">bash</p>
+  <pre style="margin:0;white-space:pre-wrap;word-wrap:break-word;font-size:13px;line-height:1.8;color:#a6e3a1;font-family:Menlo,Consolas,monospace;"><code>docker run --name nacos --network host -d nacos:1.1</code></pre>
+</section>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;"><strong style="color:#4F46E5;font-weight:bold;">不用在写 -p,而若访问直接 主机ip:8848 即可</strong></p>
+
+</section>

@@ -1,34 +1,32 @@
-# WeChat Official Account HTML Rules
+# 微信公众号 HTML 规则
 
-This project renders HTML fragments for the WeChat Official Account editor.
-Templates and generated output should follow these rules.
+本项目为公众号编辑器渲染 HTML 片段，模板与生成结果都应遵循以下规则。
 
-## Required
+## 必须遵循
 
-- Put all styles in inline `style` attributes. WeChat strips `<style>` and external CSS.
-- Use `<section>` for block containers. It is more stable in WeChat than `<div>`.
-- Render headings with `<p>` plus inline `font-size` and `font-weight:bold`; avoid `<h1>` to `<h6>`.
-- Use solid `background-color`; avoid `linear-gradient`.
-- Keep `border-radius` between `6px` and `8px` for cards.
-- Use `margin` and `padding` with `px` units.
-- Body font stack: `-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif`.
-- Code font stack: `Menlo,Consolas,monospace`.
-- Escape HTML special characters in user content and code blocks.
+- 所有样式写在行内 `style` 属性中，公众号会剥离 `<style>` 和外部 CSS。
+- 块级容器使用 `<section>`，在公众号中比 `<div>` 更稳定。
+- 标题用 `<p>` 加行内 `font-size` 和 `font-weight:bold` 渲染，避免 `<h1>` 到 `<h6>`。
+- 使用纯色 `background-color`，避免 `linear-gradient`。
+- 卡片的 `border-radius` 保持在 6px 到 8px。
+- `margin` 和 `padding` 使用 `px` 单位。
+- 正文字体栈：`-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif`。
+- 代码字体栈：`Menlo,Consolas,monospace`。
+- 用户内容与代码块中的 HTML 特殊字符必须转义。
 
-## Forbidden
+## 禁止使用
 
-- Do not use `display:flex` or `display:grid`.
-- Do not use `<div>` as a primary container.
-- Do not use `<h1>` to `<h6>`.
-- Do not use `<table>` for complex layout. Simple data tables are allowed only when every style is inline.
-- Do not use `position:absolute` or `position:fixed`.
-- Do not use `float` layout.
-- Do not rely on external image URLs. Images should be uploaded to the WeChat media library.
-- Do not use `<script>`, `<link>`, or `<style>`.
-- Do not use `@media`.
-- Do not rely on `class` or `id` selectors.
+- 不要使用 `display:flex` 或 `display:grid`。
+- 不要用 `<div>` 作为主要容器。
+- 不要使用 `<h1>` 到 `<h6>`。
+- 不要用 `<table>` 做复杂布局；简单数据表格仅在所有样式均为行内时可用。
+- 不要使用 `position:absolute` 或 `position:fixed`。
+- 不要使用 `float` 布局。
+- 不要依赖外部图片 URL，图片应上传到公众号素材库。
+- 不要使用 `<script>`、`<link>` 或 `<style>`。
+- 不要使用 `@media`。
+- 不要依赖 `class` 或 `id` 选择器。
 
-## Validation Scope
+## 校验范围
 
-The first implementation validates the obvious high-risk tags, attributes, and CSS properties.
-More WeChat-specific edge cases can be added to `scripts/wechat_rules.py` as they are discovered.
+当前实现校验显而易见的高风险标签、属性和 CSS 属性。后续发现的公众号特有边界情况，可继续补充到 `scripts/wechat_rules.py`。

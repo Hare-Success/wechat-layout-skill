@@ -1,0 +1,81 @@
+
+<section style="max-width:100%;padding:10px 8px;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#333333;line-height:1.9;font-size:15px;word-wrap:break-word;">
+<section style="text-align:center;padding:25px 0 15px 0;">
+
+  <p style="font-size:23px;font-weight:bold;color:#1a1a1a;line-height:1.5;margin:0;">Fenno Image</p>
+<section style="width:40px;height:3px;background-color:#4F46E5;margin:14px auto 0 auto;border-radius:2px;"></section>
+</section>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;">Use Fenno&#x27;s OpenAI-compatible image generation endpoint to create raster images with <span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">gpt-image-2</span>.</p>
+<section style="margin-top:30px;">
+<p style="margin:0 0 14px 0;"><span style="background-color:#4F46E5;color:#ffffff;font-size:12px;font-weight:bold;padding:3px 12px;border-radius:8px;letter-spacing:1px;">Part 1</span></p>
+  <p style="font-size:20px;font-weight:bold;color:#1a1a1a;margin:0 0 14px 0;line-height:1.6;">Quick Start</p>
+
+</section>
+<section style="background-color:#fafafa;border-radius:6px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:2;">
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;min-width:22px;color:#4F46E5;font-weight:bold;">1.</span><span>Read the user&#x27;s requested prompt, style, aspect ratio, size, and output location.</span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;min-width:22px;color:#4F46E5;font-weight:bold;">2.</span><span>Require the API key in <span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">FENNO_API_KEY</span>. If it is missing, ask the user to set it or provide permission to set it for the current shell session.</span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;min-width:22px;color:#4F46E5;font-weight:bold;">3.</span><span>Run the bundled script:</span></p>
+</section>
+<section style="background-color:#1e1e2e;border-radius:6px;padding:14px 16px;margin:14px 0;">
+  <p style="margin:0 0 8px 0;font-size:12px;color:#888888;font-family:Menlo,Consolas,monospace;">bash</p>
+  <pre style="margin:0;white-space:pre-wrap;word-wrap:break-word;font-size:13px;line-height:1.8;color:#a6e3a1;font-family:Menlo,Consolas,monospace;"><code>
+python &lt;skill-dir&gt;/scripts/generate_image.py --prompt &quot;...&quot; --output-dir outputs
+</code></pre>
+</section>
+<section style="background-color:#fafafa;border-radius:6px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:2;">
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;min-width:22px;color:#4F46E5;font-weight:bold;">4.</span><span>Inspect the saved image before returning it when visual quality matters.</span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;min-width:22px;color:#4F46E5;font-weight:bold;">5.</span><span>In the final response, provide the generated file path and mention any important generation settings.</span></p>
+</section>
+<section style="margin-top:30px;">
+<p style="margin:0 0 14px 0;"><span style="background-color:#4F46E5;color:#ffffff;font-size:12px;font-weight:bold;padding:3px 12px;border-radius:8px;letter-spacing:1px;">Part 2</span></p>
+  <p style="font-size:20px;font-weight:bold;color:#1a1a1a;margin:0 0 14px 0;line-height:1.6;">Defaults</p>
+
+</section>
+<section style="background-color:#fafafa;border-radius:6px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:2;">
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span>Base URL: <span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">https://api.fenno.ai</span></span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span>Endpoint: <span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">/v1/images/generations</span></span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span>Model: <span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">gpt-image-2</span></span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span>Environment variable: <span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">FENNO_API_KEY</span></span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span>Default size: <span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">1024x1024</span></span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span>Default output format: PNG</span></p>
+</section>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;">Do not hardcode API keys into skill files, scripts, logs, or final responses. Prefer environment variables.</p>
+<section style="margin-top:30px;">
+<p style="margin:0 0 14px 0;"><span style="background-color:#4F46E5;color:#ffffff;font-size:12px;font-weight:bold;padding:3px 12px;border-radius:8px;letter-spacing:1px;">Part 3</span></p>
+  <p style="font-size:20px;font-weight:bold;color:#1a1a1a;margin:0 0 14px 0;line-height:1.6;">Script Usage</p>
+
+</section>
+<section style="background-color:#1e1e2e;border-radius:6px;padding:14px 16px;margin:14px 0;">
+  <p style="margin:0 0 8px 0;font-size:12px;color:#888888;font-family:Menlo,Consolas,monospace;">bash</p>
+  <pre style="margin:0;white-space:pre-wrap;word-wrap:break-word;font-size:13px;line-height:1.8;color:#a6e3a1;font-family:Menlo,Consolas,monospace;"><code>
+python &lt;skill-dir&gt;/scripts/generate_image.py \\
+
+&amp;#x20; --prompt &quot;A clean product render of a glass tea cup on a walnut table&quot; \\
+
+&amp;#x20; --size 1024x1024 \\
+
+&amp;#x20; --output-dir outputs \\
+
+&amp;#x20; --filename tea-cup.png
+</code></pre>
+</section>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;">Useful options:</p>
+<section style="background-color:#fafafa;border-radius:6px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:2;">
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span><span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">--prompt</span>: required image prompt.</span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span><span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">--size</span>: image size such as <span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">1024x1024</span>, <span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">1536x1024</span>, or any size supported by the endpoint.</span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span><span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">--n</span>: number of images to request.</span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span><span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">--quality</span>: optional quality value, passed through when provided.</span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span><span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">--style</span>: optional style value, passed through when provided.</span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span><span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">--output-dir</span>: directory for generated image files.</span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span><span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">--filename</span>: filename for a single image. For multiple images, the script appends an index.</span></p>
+<p style="margin:0 0 8px 0;color:#555555;line-height:1.9;"><span style="display:inline-block;width:14px;color:#4F46E5;font-weight:bold;">&bull;</span><span><span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">--base-url</span>: override the base URL only if the user explicitly asks.</span></p>
+</section>
+<section style="margin-top:30px;">
+<p style="margin:0 0 14px 0;"><span style="background-color:#4F46E5;color:#ffffff;font-size:12px;font-weight:bold;padding:3px 12px;border-radius:8px;letter-spacing:1px;">Part 4</span></p>
+  <p style="font-size:20px;font-weight:bold;color:#1a1a1a;margin:0 0 14px 0;line-height:1.6;">Prompting Guidance</p>
+
+</section>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;">Write prompts as direct visual briefs. Include subject, scene, composition, lighting, material, camera or art style, and constraints. Keep file-format or delivery instructions outside the prompt unless they are visual requirements.</p>
+<p style="margin:12px 0;font-size:15px;line-height:1.9;color:#333333;">When the user asks for variants, generate <span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">--n</span> images when appropriate. When the user asks for a specific aspect ratio, choose the closest supported <span style="font-family:Menlo,Consolas,monospace;background-color:#F3F4F6;padding:1px 4px;border-radius:4px;">--size</span> and state that choice.</p>
+
+</section>

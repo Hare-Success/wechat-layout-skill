@@ -1,0 +1,10 @@
+{
+  "name": "tech-ai",
+  "display_name": "Tech AI",
+  "description": "A WeChat Official Account theme for tech and AI content, based on card-style article layouts.",
+  "primary": "#4F46E5",
+  "light_bg": "#F0F4FF",
+  "body_color": "#333333",
+  "body_font_size": "15px",
+  "body_line_height": "1.9"
+}
